@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <title>烟台市立民红木家具有限公司</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <!-- navigate bar 导航 -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- 品牌 logo -->
+        <a class="navbar-brand" style="color: white;" href="/">立民家具</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/"> 网站首页</a></li>
+          <li><%= link_to '关于我们', aboutus_index_path %></li>
+          <li><%= link_to '铭道设计', service_index_path %></li>
+          <li><%= link_to '产品中心', furnitures_path %></li>
+          <li><%= link_to '公司荣誉', honor_index_path %></li>
+          <li><%= link_to '联系我们', contact_index_path, data: {no_turbolink: true} %></li>
+          <li><%= link_to '添加产品', new_furniture_path %></li>
+        </ul>
+      </div><!--/.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+
+  <div class="mainindex container">
+        <%= yield %>
+  </div>
+
+  <div class="footer" style="width:100%; overflow:hidden; background:#4f4840;">
+    <p style="text-align:center; line-height:25px; padding-top:5px;color:#fff;">&copy; 版权所有：烟台市立民红木家具有限公司 地址：山东省烟台市牟平区武宁街道立民街158号 营销电话：0535-4707733 13780901198 传真：0535-4326056</p>
+  </div>
+
+  <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+  <script>
+    !function ($) {
+      $(function(){
+        var numpic = $('#slides li').size()-1;
+        var nownow = 0;
+        var inout = 0;
+        var TT = 0;
+        var SPEED = 5000;
+        
+        $('#slides li').eq(0).siblings('li').css({'display':'none'});
+        
+        var ulstart = '<ul id="pagination">',
+        ulcontent = '',
+        ulend = '</ul>';
+        ADDLI();
+        var pagination = $('#pagination li');
+        var paginationwidth = $('#pagination').width();
+        $('#pagination').css('margin-left',(470-paginationwidth))
+        
+        pagination.eq(0).addClass('current')
+      
+        function ADDLI(){
+          //var lilicount = numpic + 1;
+          for(var i = 0; i <= numpic; i++){
+            ulcontent += '<li>' + '<a href="#">' + (i+1) + '</a>' + '</li>';
+          }
+      
+          $('#slides').after(ulstart + ulcontent + ulend);
+        }
+      
+        pagination.on('click',DOTCHANGE)
+      
+        function DOTCHANGE(){
+          var changenow = $(this).index();
+          
+          $('#slides li').eq(nownow).css('z-index','900');
+          $('#slides li').eq(changenow).css({'z-index':'800'}).show();
+          pagination.eq(changenow).addClass('current').siblings('li').removeClass('current');
+          $('#slides li').eq(nownow).fadeOut(400,function(){$('#slides li').eq(changenow).fadeIn(500);});
+          nownow = changenow;
+        }
+      
+        pagination.mouseenter(function(){
+          inout = 1;
+        })
+        
+        pagination.mouseleave(function(){
+          inout = 0;
+        })
+      
+        function GOGO(){
+          var NN = nownow+1;
+          
+          if( inout == 1 ){
+          } else {
+            if(nownow < numpic){
+              $('#slides li').eq(nownow).css('z-index','900');
+              $('#slides li').eq(NN).css({'z-index':'800'}).show();
+              pagination.eq(NN).addClass('current').siblings('li').removeClass('current');
+              $('#slides li').eq(nownow).fadeOut(400,function(){$('#slides li').eq(NN).fadeIn(500);});
+              nownow += 1;
+            }else{
+              NN = 0;
+              $('#slides li').eq(nownow).css('z-index','900');
+              $('#slides li').eq(NN).stop(true,true).css({'z-index':'800'}).show();
+              $('#slides li').eq(nownow).fadeOut(400,function(){$('#slides li').eq(0).fadeIn(500);});
+              pagination.eq(NN).addClass('current').siblings('li').removeClass('current');
+              nownow=0;
+            }
+          }
+          TT = setTimeout(GOGO, SPEED);
+        }
+        TT = setTimeout(GOGO, SPEED); 
+      })
+    }(window.jQuery)
+  </script>
+</body>
+</html>

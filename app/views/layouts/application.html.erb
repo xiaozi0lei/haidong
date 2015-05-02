@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <title>烟台市立民红木家具有限公司</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <!-- navigate bar 导航 -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- 品牌 logo -->
+        <a class="navbar-brand" style="color: white;" href="/">立民家具</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/"> 网站首页</a></li>
+          <li><%= link_to '关于我们', aboutus_index_path %></li>
+          <li><%= link_to '铭道设计', service_index_path %></li>
+          <li><%= link_to '产品中心', furnitures_path %></li>
+          <li><%= link_to '公司荣誉', honor_index_path %></li>
+          <li><%= link_to '联系我们', contact_index_path, data: { no_turbolink: true } %></li>
+          <li><%= link_to '添加产品', new_furniture_path %></li>
+          <!-- dropdown list 下拉列表 -->
+        </ul>
+      </div><!--/.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+
+  <div class="mainindex container">
+    <%= yield %>
+  </div>
+
+  <div class="footer" style="width:100%; overflow:hidden; background:#4f4840;">
+    <p style="text-align:center; line-height:25px; padding-top:5px;color:#fff;">&copy; 版权所有：烟台市立民红木家具有限公司 地址：山东省烟台市牟平区武宁街道立民街158号 营销电话：0535-4707733 13780901198 传真：0535-4326056</p>
+  </div>
+
+  <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

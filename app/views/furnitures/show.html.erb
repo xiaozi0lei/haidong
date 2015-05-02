@@ -1,0 +1,30 @@
+<div class="row" style="background: url('/assets/xw.jpg') repeat-x scroll 0% 0% transparent;">
+  <div class="col-md-2">
+  </div>
+
+  <div class="col-md-8" style="background: url('/assets/main.png') no-repeat scroll 0% 0% transparent;">
+    <br />
+    <div style="background: url('/assets/cptit.png') no-repeat scroll 0% 0% transparent">
+      <p class="text-right" style="padding: 15px 15px 25px 0px;">当前位置：<a href="/">首页</a>&gt;&gt;产品展示</p>
+    </div>
+    <div style="height: 505px; text-align: center;">
+
+  <%= @furniture.name %>
+  <%= @furniture.description %>
+  <br />
+  <%= image_tag(@furniture.picture_url, :width => 600) if @furniture.picture.present? %>
+  <br />
+
+<%= link_to 'Edit', edit_furniture_path(@furniture) %> |
+<%= link_to 'Back', furnitures_path %> ｜
+<%= link_to 'Delete', furniture_path(@furniture),
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
+    <div>&nbsp;</div>
+      <span class="dw"></span>
+    </div>
+  </div>
+
+  <div class="col-md-1">
+  </div>
+</div>
+
